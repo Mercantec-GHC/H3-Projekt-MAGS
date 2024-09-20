@@ -1,4 +1,7 @@
 
+using Microsoft.EntityFrameworkCore;
+using API.Context;
+
 namespace API
 {
     public class Program
@@ -6,6 +9,14 @@ namespace API
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            IConfiguration Configuration = builder.Configuration;
+
+            string connectionString = Configuration.GetConnectionString("DefaultConnection")
+                                      ?? Environment.GetEnvironmentVariable("DefaultConnection");
+
+            builder.Services.AddDbContext<AppDbContext>(options =>
+                options.UseNpgsql(connectionString));
 
             // Add services to the container.
 
@@ -17,11 +28,8 @@ namespace API
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
-            {
                 app.UseSwagger();
                 app.UseSwaggerUI();
-            }
 
             app.UseHttpsRedirection();
 

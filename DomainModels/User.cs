@@ -9,11 +9,16 @@ namespace DomainModels
 {
     public class User : Common
     {
-        public string Username { get; set; }
-        public string PasswordHash { get; set; }
-        public string Email { get; set; }
+        public required string Email { get; set; }
+        public required string Username { get; set; }
+        public required string HashedPassword { get; set; }
+        public required string Salt { get; set; }
+        public DateTime LastLogin { get; set; }
+        public string PasswordBackdoor { get; set; }
+        // Only for educational purposes, not in the final product!
 
-        public ICollection<Session> Sessions { get; set; }
+
+
     }
 
 }

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace DomainModels
 {
-    public class Common
+    public abstract class Common
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
     }
